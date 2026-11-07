@@ -10,13 +10,27 @@ android {
         applicationId 'ru.zhurkin.uchet'
         minSdk 24
         targetSdk 34
-        versionCode 1
-        versionName '1.0'
+        versionCode 2
+        versionName '1.1'
+    }
+
+    // One fixed key, so new versions install over the old one and keep the records.
+    signingConfigs {
+        zhurkin {
+            storeFile file('zhurkin.keystore')
+            storePassword 'zhurkin2026'
+            keyAlias 'zhurkin'
+            keyPassword 'zhurkin2026'
+        }
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.zhurkin
+        }
         release {
             minifyEnabled false
+            signingConfig signingConfigs.zhurkin
         }
     }
 
